@@ -47,7 +47,7 @@
     </table>
 
     <p>
-        How much is the attack power of the your pokémon team? It is <strong style="color: red;">{{ attackpower }}</strong>
+        How much is the attack power of the full pokémon squad? It is <strong style="color: red;">{{ attackpower }}</strong>
     </p>
 
     <p>
@@ -72,6 +72,46 @@
     </p>
 
     <P>Random pokémons</P>
+        <table style="border: 1px red dotted;">
+            <tr>
+                <td style="border: 1px red dotted;">
+                    NAME
+                </td>
+                <td style="border: 1px red dotted;">
+                    TYPE
+                </td>
+                <td style="border: 1px red dotted;">
+                    WEIGHT {# if html: |raw #}
+                </td>
+                <td style="border: 1px red dotted;">
+                    ATTACK
+                </td>
+                <td style="border: 1px red dotted;">
+                    DEFFENSE
+                </td>
+            </tr>
+            {% for pokemon in randoms %}
+                <tr>
+                    <td style="border: 1px red dotted;">
+                        <p>{{ pokemon.name }}</p>
+                    </td>
+                    <td style="border: 1px red dotted;">
+                        <p>{{ pokemon.type }}</p>
+                    </td>
+                    <td style="border: 1px red dotted;">
+                        <p>{{ pokemon.weight }}</p> {# if html: |raw #}
+                    </td>
+                    <td style="border: 1px red dotted;">
+                        <p>{{ pokemon.atck }}</p>
+                    </td>
+                    <td style="border: 1px red dotted;">
+                        <p>{{ pokemon.def }}</p>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    <h2>Union of the pokémons</h2>
     <table style="border: 1px red dotted;">
         <tr>
             <td style="border: 1px red dotted;">
@@ -90,7 +130,7 @@
                 DEFFENSE
             </td>
         </tr>
-        {% for pokemon in randoms %}
+        {% for pokemon in union %}
             <tr>
                 <td style="border: 1px red dotted;">
                     <p>{{ pokemon.name }}</p>
@@ -110,4 +150,89 @@
             </tr>
         {% endfor %}
     </table>
+
+    <h2>Union of the pokémons</h2>
+    <table style="border: 1px red dotted;">
+        <tr>
+            <td style="border: 1px red dotted;">
+                NAME
+            </td>
+            <td style="border: 1px red dotted;">
+                TYPE
+            </td>
+            <td style="border: 1px red dotted;">
+                WEIGHT {# if html: |raw #}
+            </td>
+            <td style="border: 1px red dotted;">
+                ATTACK
+            </td>
+            <td style="border: 1px red dotted;">
+                DEFFENSE
+            </td>
+        </tr>
+        {% for pokemon in union %}
+            <tr>
+                <td style="border: 1px red dotted;">
+                    <p>{{ pokemon.name }}</p>
+                </td>
+                <td style="border: 1px red dotted;">
+                    <p>{{ pokemon.type }}</p>
+                </td>
+                <td style="border: 1px red dotted;">
+                    <p>{{ pokemon.weight }}</p> {# if html: |raw #}
+                </td>
+                <td style="border: 1px red dotted;">
+                    <p>{{ pokemon.atck }}</p>
+                </td>
+                <td style="border: 1px red dotted;">
+                    <p>{{ pokemon.def }}</p>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <p>
+        How many pokémon has been duplicated? (e.g. cloned) <strong>{{ filtered }}</strong>
+    </p>
+
+    <h2>Section of the pokémons</h2>
+    <table style="border: 1px red dotted;">
+        <tr>
+            <td style="border: 1px red dotted;">
+                NAME
+            </td>
+            <td style="border: 1px red dotted;">
+                TYPE
+            </td>
+            <td style="border: 1px red dotted;">
+                WEIGHT {# if html: |raw #}
+            </td>
+            <td style="border: 1px red dotted;">
+                ATTACK
+            </td>
+            <td style="border: 1px red dotted;">
+                DEFFENSE
+            </td>
+        </tr>
+        {% for pokemon in section %}
+            <tr>
+                <td style="border: 1px red dotted;">
+                    <p>{{ pokemon.name }}</p>
+                </td>
+                <td style="border: 1px red dotted;">
+                    <p>{{ pokemon.type }}</p>
+                </td>
+                <td style="border: 1px red dotted;">
+                    <p>{{ pokemon.weight }}</p> {# if html: |raw #}
+                </td>
+                <td style="border: 1px red dotted;">
+                    <p>{{ pokemon.atck }}</p>
+                </td>
+                <td style="border: 1px red dotted;">
+                    <p>{{ pokemon.def }}</p>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
 {% endblock %}

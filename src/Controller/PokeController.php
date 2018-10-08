@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 use App\Entity\Pokemon;
+use phpDocumentor\Reflection\Types\Array_;
 use phpDocumentor\Reflection\Types\Boolean;
 use phpDocumentor\Reflection\Types\Integer;
 use PhpParser\Node\Expr\Isset_;
@@ -49,6 +50,9 @@ class PokeController extends Controller
             $number = $this->getNumberOfPokemonByName("pikachu");
             $bestattack = $this->getBestAttackPowerPokemon();
             $randompokemons = $this->randomizePokemons();
+            $unionofpokes = $this->getPokemonUnion($this->pokemons, $randompokemons);
+            $filtered = $this->FilteringOfDuplicates($this->pokemons);
+            $section = $this->SectionOfArrays($this->pokemons, $randompokemons)["pokes"];
             //var_dump($randompokemons);
             $returnaray=array(
                 "pokemons" => $this->pokemons,
@@ -57,7 +61,10 @@ class PokeController extends Controller
                 "istheretype" => $istheretype,
                 "numberinrow" => $number,
                 "bestattack" => $bestattack,
-                "randoms" => $randompokemons
+                "randoms" => $randompokemons,
+                "union"=>$unionofpokes,
+                "filtered"=>$filtered,
+                "section"=>$section
             );
             //return $this->render('poke/pokelist.html.twig',array("pokemons" => $this->pokemons, "attackpower"=>$powersum));
             return $this->render('poke/pokelist.html.twig',$returnaray);
@@ -96,9 +103,14 @@ class PokeController extends Controller
             $poke->setWeight(rand(0,20));
             $pokearray[] = $poke;
         }
+        $pokearray[] = $this->pokemons[0];
         return $pokearray;
     }
 
+    /**
+     * ÖSSZEGZÉS
+     * @return int
+     */
     private function getSummedAttackValues():int{
         $sum = 0;
         foreach ($this->pokemons as $pokemon){
@@ -107,7 +119,7 @@ class PokeController extends Controller
         return $sum;
     }
 
-    private function getCountOfTypes($type){
+    private function getCountOfTypes($type) : int{
         foreach ($this->pokemons as $pokemon){
             $db = 0;
             if($pokemon->getAbilityType() ==  $type){
@@ -168,7 +180,7 @@ class PokeController extends Controller
      * @return array
      */
     function getPokemonUnion($array1, $array2) : array {
-        $n1 = sizeof($array1); $n2 = sizeod($array2);
+        $n1 = sizeof($array1); $n2 = sizeof($array2);
 
         for($i = 0; $i<$n1; $i++){
             $returnarray[] = $array1[$i];
@@ -192,18 +204,18 @@ class PokeController extends Controller
      * @param $array1
      * @return array
      */
-    private function FilteringOfDuplicates($array1) : array {
+    private function FilteringOfDuplicates($array1) : int {
         $db = 0;
         for($i = 1; $i<sizeof($array1); $i++){
             $j =0;
-            while ($j < $db && ($array1[$i] != $array1[$j])){
+            while ($j <= $db && ($array1[$i] != $array1[$j])){
                 $j++;
             }
             if($j > $db){
                 $db++;
                 $array1[$db] = $array1[$i];
             }
-        }return db;
+        }return $db;
     }
 
     /**
@@ -214,17 +226,21 @@ class PokeController extends Controller
      */
     private function SectionOfArrays($array1, $array2) : array{
         $db = 0;
-        $n1 = sizeof($array1); $n2 = sizeof($array2);
+        $retarray = array("pokes");
+        $n1 = sizeof($array1);
+        $n2 = sizeof($array2);
+
         for ($i = 0; $i<$n1; $i++){
             $j =0;
             while (($j<$n2) && $array1[$i] != $array2[$j]){
                 $j++;
             }
-            if ($j <$n2){
+            if ($j < $n2){
                 //$db++;
-                $retarray[] = $array1[$i];
+                $retarray["pokes"][] = $array1[$i];
             }
         }
+        //var_dump($retarray);
         return $retarray;
 
     }
