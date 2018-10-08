@@ -71,5 +71,43 @@
         Which is your strongest pokémon? It is <strong>{{ bestattack.name }} who is a {{ bestattack.type }}</strong>
     </p>
 
-    {{ dump(pokemons) }}
+    <P>Random pokémons</P>
+    <table style="border: 1px red dotted;">
+        <tr>
+            <td style="border: 1px red dotted;">
+                NAME
+            </td>
+            <td style="border: 1px red dotted;">
+                TYPE
+            </td>
+            <td style="border: 1px red dotted;">
+                WEIGHT {# if html: |raw #}
+            </td>
+            <td style="border: 1px red dotted;">
+                ATTACK
+            </td>
+            <td style="border: 1px red dotted;">
+                DEFFENSE
+            </td>
+        </tr>
+        {% for pokemon in randoms %}
+            <tr>
+                <td style="border: 1px red dotted;">
+                    <p>{{ pokemon.name }}</p>
+                </td>
+                <td style="border: 1px red dotted;">
+                    <p>{{ pokemon.type }}</p>
+                </td>
+                <td style="border: 1px red dotted;">
+                    <p>{{ pokemon.weight }}</p> {# if html: |raw #}
+                </td>
+                <td style="border: 1px red dotted;">
+                    <p>{{ pokemon.atck }}</p>
+                </td>
+                <td style="border: 1px red dotted;">
+                    <p>{{ pokemon.def }}</p>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

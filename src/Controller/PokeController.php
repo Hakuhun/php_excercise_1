@@ -48,13 +48,16 @@ class PokeController extends Controller
             $istheretype = $this->isThereTypeOfPokemon("fire");
             $number = $this->getNumberOfPokemonByName("pikachu");
             $bestattack = $this->getBestAttackPowerPokemon();
+            $randompokemons = $this->randomizePokemons();
+            //var_dump($randompokemons);
             $returnaray=array(
                 "pokemons" => $this->pokemons,
                 "attackpower"=>$powersum,
                 "numberoftypes" =>$countoftypes,
                 "istheretype" => $istheretype,
                 "numberinrow" => $number,
-                "bestattack" => $bestattack
+                "bestattack" => $bestattack,
+                "randoms" => $randompokemons
             );
             //return $this->render('poke/pokelist.html.twig',array("pokemons" => $this->pokemons, "attackpower"=>$powersum));
             return $this->render('poke/pokelist.html.twig',$returnaray);
@@ -78,6 +81,22 @@ class PokeController extends Controller
             }
         }
         return $returnarray;
+    }
+
+    private function randomizePokemons(): array{
+        $types = array("fire", "fairy", "normal", "grass", "psyho", "dark", "light");
+
+        for ($i = 0; $i<20; $i++){
+            $poke = new Pokemon();
+            $poke->setName("PokeName #".$i);
+            $poke->setType("ratata");
+            $poke->setAbilityType($types[rand(0,sizeof($types)-1)]);
+            $poke->setAtck(rand(0,100));
+            $poke->setDef(rand(0,100));
+            $poke->setWeight(rand(0,20));
+            $pokearray[] = $poke;
+        }
+        return $pokearray;
     }
 
     private function getSummedAttackValues():int{
@@ -110,7 +129,7 @@ class PokeController extends Controller
     }
 
     /**
-     * 
+     *
      * @param $name
      * @return int
      */
