@@ -4,16 +4,46 @@
 {# gb/gblist.html.twig #}
 {% extends 'poke/pokeindex.html.twig' %}
 
-{% block pokeIndex %}
+{% block pokeContent %}
     {% include 'flashbag.html.twig' %}
     {#<p><a href="{{ path('gbForm') }}">&raquo; ADD NEW ENTRY</a></p>#}
+    <table style="border: 1px red dotted;">
+        <tr>
+            <td style="border: 1px red dotted;">
+                <p>NAME</p>
+            </td>
+            <td style="border: 1px red dotted;">
+                <p>TYPE</p>
+            </td>
+            <td style="border: 1px red dotted;>
+                <p>WEIGHT</p> {# if html: |raw #}
+            </td>
+            <td style="border: 1px red dotted;">
+                <p>ATTACK</p>
+            </td>
+            <td style="border: 1px red dotted;">
+                <p>DEFFENSE</p>
+            </td>
+        </tr>
     {% for pokemon in pokemons %}
-        <div style="border:1px solid red">
-            <p>Name: {{ pokemon.name }}</p>
-            <p>Email: {{ pokemon.type }}</p>
-            <p>{{ pokemon.weight }}</p> {# if html: |raw #}
-            {{ dump(pokemon) }}
-        </div>
+                <tr>
+                    <td style="border: 1px red dotted;">
+                        <p>{{ pokemon.name }}</p>
+                    </td>
+                    <td style="border: 1px red dotted;">
+                        <p>{{ pokemon.type }}</p>
+                    </td>
+                    <td style="border: 1px red dotted;">
+                        <p>{{ pokemon.weight }}</p> {# if html: |raw #}
+                    </td>
+                    <td style="border: 1px red dotted;">
+                        <p>{{ pokemon.atck }}</p>
+                    </td>
+                    <td style="border: 1px red dotted;">
+                        <p>{{ pokemon.def }}</p>
+                    </td>
+                </tr>
     {% endfor %}
-    {{ dump(pokemons) }} {# Laravel: dd #}
+    </table>
+    {{ dump(pokemons) }}
 {% endblock %}

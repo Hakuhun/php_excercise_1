@@ -33,22 +33,15 @@ class PokeController extends Controller
      */
     private $pokemons;
 
-    public function __construct()
-    {
-        if (!isset($this->pokemons)){
-            $this->pokemons = $this->getPokemonsFromFile();
-        }
-    }
-
     /**
      * @Route(path="/", name="pokeIndex")
      * @param Request $request
      * @return Response
      */
     public function pokeIndexAction(Request $request) : Response{
+        $this->pokemons = $this->getPokemonsFromFile();
         if (isset($this->pokemons)){
-            var_dump($this->pokemons);
-            return $this->render('poke/pokelist.html.twig',array("pokemons"=> $this->pokemons));
+            return $this->render('poke/pokelist.html.twig',array("pokemons" => $this->pokemons));
         }
         die("HUPSZ");
     }
@@ -70,5 +63,4 @@ class PokeController extends Controller
         }
         return $returnarray;
     }
-
 }

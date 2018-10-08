@@ -1,10 +1,10 @@
-@Weedhead@bulbasaur@grass@6.9@49@49
-@Electric rat@pikachu@electric@6.0@55@40
-@Jiggly@jigglypuff@fairy@5.5@45@20
-@Fat S@snorlax@normal@460@110@65
-@Mew@mew@psychic@4.0@100@100
-@Ceca@meowth@4.2@45@35
-@Izé@ditto@normal@4.0@48@48
-@NotADragon@charizard@fire@90.5@84@78
-@Naruto@vulpix@fire@9.9@41@40
-@Smelly@gloom@grass@8.6@65@70
+Weedhead@bulbasaur@grass@6.9@49@49
+Electric rat@pikachu@electric@6.0@55@40
+Jiggly@jigglypuff@fairy@5.5@45@20
+Fat S@snorlax@normal@460@110@65
+Mew@mew@psychic@4.0@100@100
+Ceca@meowth@normal@4.2@45@35
+Izé@ditto@normal@4.0@48@48
+NotADragon@charizard@fire@90.5@84@78
+Naruto@vulpix@fire@9.9@41@40
+Smelly@gloom@grass@8.6@65@70
