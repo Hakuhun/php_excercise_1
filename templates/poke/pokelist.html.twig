@@ -1,0 +1,19 @@
+{# entries[] => name, email, text #}
+{# actions (route names): gbAdd, gbForm #}
+
+{# gb/gblist.html.twig #}
+{% extends 'poke/pokeindex.html.twig' %}
+
+{% block pokeIndex %}
+    {% include 'flashbag.html.twig' %}
+    {#<p><a href="{{ path('gbForm') }}">&raquo; ADD NEW ENTRY</a></p>#}
+    {% for pokemon in pokemons %}
+        <div style="border:1px solid red">
+            <p>Name: {{ pokemon.name }}</p>
+            <p>Email: {{ pokemon.type }}</p>
+            <p>{{ pokemon.weight }}</p> {# if html: |raw #}
+            {{ dump(pokemon) }}
+        </div>
+    {% endfor %}
+    {{ dump(pokemons) }} {# Laravel: dd #}
+{% endblock %}
