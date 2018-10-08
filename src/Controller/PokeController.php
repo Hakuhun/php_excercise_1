@@ -48,7 +48,7 @@ class PokeController extends Controller
     public function pokeIndexAction(Request $request) : Response{
         if (isset($this->pokemons)){
             var_dump($this->pokemons);
-            return $this->render('poke/pokelist.html.twig', $this->pokemons["pokemons"]);
+            return $this->render('poke/pokelist.html.twig',array("pokemons"=> $this->pokemons));
         }
         die("HUPSZ");
     }
@@ -65,7 +65,7 @@ class PokeController extends Controller
                 $poke->setWeight(doubleval($entity[3]));
                 $poke ->setAtck(intval($entity[4]));
                 $poke->setDef(intval($entity[5]));
-                $returnarray["pokemons"][] = $poke;
+                $returnarray[] = $poke;
             }
         }
         return $returnarray;
