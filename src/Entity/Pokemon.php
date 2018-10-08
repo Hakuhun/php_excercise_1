@@ -92,7 +92,7 @@ class Pokemon
     /**
      * @return string
      */
-    public function getAbilitytype(): string
+    public function getAbilityType(): string
     {
         return $this->abilitytype;
     }
@@ -100,7 +100,7 @@ class Pokemon
     /**
      * @param string $abilitytype
      */
-    public function setAbilitytype(string $abilitytype): void
+    public function setAbilityType(string $abilitytype): void
     {
         $this->abilitytype = $abilitytype;
     }

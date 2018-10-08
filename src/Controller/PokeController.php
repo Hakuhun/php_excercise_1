@@ -10,6 +10,8 @@ namespace App\Controller;
 
 
 use App\Entity\Pokemon;
+use phpDocumentor\Reflection\Types\Boolean;
+use phpDocumentor\Reflection\Types\Integer;
 use PhpParser\Node\Expr\Isset_;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,7 +43,21 @@ class PokeController extends Controller
     public function pokeIndexAction(Request $request) : Response{
         $this->pokemons = $this->getPokemonsFromFile();
         if (isset($this->pokemons)){
-            return $this->render('poke/pokelist.html.twig',array("pokemons" => $this->pokemons));
+            $powersum = $this->getSummedAttackValues();
+            $countoftypes = $this->getCountOfTypes("normal");
+            $istheretype = $this->isThereTypeOfPokemon("fire");
+            $number = $this->getNumberOfPokemonByName("pikachu");
+            $bestattack = $this->getBestAttackPowerPokemon();
+            $returnaray=array(
+                "pokemons" => $this->pokemons,
+                "attackpower"=>$powersum,
+                "numberoftypes" =>$countoftypes,
+                "istheretype" => $istheretype,
+                "numberinrow" => $number,
+                "bestattack" => $bestattack
+            );
+            //return $this->render('poke/pokelist.html.twig',array("pokemons" => $this->pokemons, "attackpower"=>$powersum));
+            return $this->render('poke/pokelist.html.twig',$returnaray);
         }
         die("HUPSZ");
     }
@@ -62,5 +78,67 @@ class PokeController extends Controller
             }
         }
         return $returnarray;
+    }
+
+    private function getSummedAttackValues():int{
+        $sum = 0;
+        foreach ($this->pokemons as $pokemon){
+            $sum+=$pokemon->getAtck();
+        }
+        return $sum;
+    }
+
+    private function getCountOfTypes($type){
+        foreach ($this->pokemons as $pokemon){
+            $db = 0;
+            if($pokemon->getAbilityType() ==  $type){
+                $db++;
+            }
+        }
+        return $db;
+    }
+
+    private function isThereTypeOfPokemon($type) : bool {
+        $i = 0; $n = sizeof($this->pokemons);
+        while ($i < $n && $this->pokemons[$i]->getAbilityType() != $type){
+            $i++;
+        }
+        if ($i<$n)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * 
+     * @param $name
+     * @return int
+     */
+    private function getNumberOfPokemonByName($name) : int {
+        $i = 0; $n = sizeof($this->pokemons);
+        while ($i<$n && $this->pokemons[$i]->getType() != $name ){
+             $i++;
+        }
+
+        if($i<$n){
+            return $i+1;
+        }
+
+        return $i;
+    }
+
+    /**
+     * Maximumkiválasztás
+     * @return Pokemon
+     */
+    private function getBestAttackPowerPokemon() : Pokemon{
+        $max = 0; $index = 0;
+        for($i = 0; $i < sizeof($this->pokemons); $i++){
+            if ($max < $this->pokemons[$i]->getAtck()){
+                $index = $i;
+                $max = $this->pokemons[$i]->getAtck();
+            }
+        }
+        return $this->pokemons[$index];
     }
 }

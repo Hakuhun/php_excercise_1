@@ -10,19 +10,19 @@
     <table style="border: 1px red dotted;">
         <tr>
             <td style="border: 1px red dotted;">
-                <p>NAME</p>
+                NAME
             </td>
             <td style="border: 1px red dotted;">
-                <p>TYPE</p>
-            </td>
-            <td style="border: 1px red dotted;>
-                <p>WEIGHT</p> {# if html: |raw #}
+                TYPE
             </td>
             <td style="border: 1px red dotted;">
-                <p>ATTACK</p>
+                WEIGHT {# if html: |raw #}
             </td>
             <td style="border: 1px red dotted;">
-                <p>DEFFENSE</p>
+                ATTACK
+            </td>
+            <td style="border: 1px red dotted;">
+                DEFFENSE
             </td>
         </tr>
     {% for pokemon in pokemons %}
@@ -45,5 +45,31 @@
                 </tr>
     {% endfor %}
     </table>
+
+    <p>
+        How much is the attack power of the your pokémon team? It is <strong style="color: red;">{{ attackpower }}</strong>
+    </p>
+
+    <p>
+        How many pokemon is normal type pokémon? <strong style="color: #e7e7e7;">{{ numberoftypes }}</strong>
+    </p>
+
+    <p>
+        Is there fire type pokémon in your squad?
+        {% if istheretype %}
+            <strong style="color: green;">YES!</strong>
+        {% else %}
+            <strong style="color: red;">No :(</strong>
+        {% endif %}
+    </p>
+
+    <p>
+        What is Bulbasaur to you? He is <strong style="color: yellow;">#{{ numberinrow }}</strong> to ME.
+    </p>
+
+    <p>
+        Which is your strongest pokémon? It is <strong>{{ bestattack.name }} who is a {{ bestattack.type }}</strong>
+    </p>
+
     {{ dump(pokemons) }}
 {% endblock %}
