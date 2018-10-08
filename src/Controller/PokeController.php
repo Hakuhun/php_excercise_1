@@ -160,4 +160,72 @@ class PokeController extends Controller
         }
         return $this->pokemons[$index];
     }
+
+    /**
+     *Union of 2 arrays
+     * @param $array1
+     * @param $array2
+     * @return array
+     */
+    function getPokemonUnion($array1, $array2) : array {
+        $n1 = sizeof($array1); $n2 = sizeod($array2);
+
+        for($i = 0; $i<$n1; $i++){
+            $returnarray[] = $array1[$i];
+        }
+        $db = $n1;
+        for($j = 0; $j<$n2; $j++){
+            $i++;
+            while (($i<$n1) && ($array1[$i] != $array2[$i])){
+                $i++;
+            }
+            if($i > $n1){
+                $db++;
+                $returnarray[] = $array2[$j];
+            }
+        }
+        return $returnarray;
+    }
+
+    /**
+     * ISMÉTLŐDÉSEK KISZŰRÉSE (NIK-es diákból)
+     * @param $array1
+     * @return array
+     */
+    private function FilteringOfDuplicates($array1) : array {
+        $db = 0;
+        for($i = 1; $i<sizeof($array1); $i++){
+            $j =0;
+            while ($j < $db && ($array1[$i] != $array1[$j])){
+                $j++;
+            }
+            if($j > $db){
+                $db++;
+                $array1[$db] = $array1[$i];
+            }
+        }return db;
+    }
+
+    /**
+     * METSZET (nIK-es diából)
+     * @param $array1
+     * @param $array2
+     * @return array
+     */
+    private function SectionOfArrays($array1, $array2) : array{
+        $db = 0;
+        $n1 = sizeof($array1); $n2 = sizeof($array2);
+        for ($i = 0; $i<$n1; $i++){
+            $j =0;
+            while (($j<$n2) && $array1[$i] != $array2[$j]){
+                $j++;
+            }
+            if ($j <$n2){
+                //$db++;
+                $retarray[] = $array1[$i];
+            }
+        }
+        return $retarray;
+
+    }
 }
